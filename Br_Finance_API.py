@@ -1,7 +1,6 @@
 from brfinance import CVMAsyncBackend
 import pandas as pd
 from datetime import datetime, date
-import openpyxl
 
 cvm_httpclient = CVMAsyncBackend()
 
