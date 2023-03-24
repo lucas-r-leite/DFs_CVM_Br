@@ -77,7 +77,10 @@ df_pivot = pd.read_excel('pivot_table.xlsx')
 
 # Obter o número máximo de valores em uma única célula "Valor" em todo o DataFrame
 max_values = int(df_pivot['Valor'].str.count('\n').max()) + 1
-value_cols = [f'{i+ano}' for i in range(max_values)]
+#value_cols = [f'{i+ano}' for i in range(max_values)]
+#ano = ano-max_values
+value_cols = [f'{ano+i}' for i in reversed(range(max_values))]
+df_pivot[value_cols] = df_pivot['Valor'].str.split('\n', expand=True)
 
 # Separar os valores da coluna "Valor" em colunas separadas
 df_pivot[value_cols] = df_pivot['Valor'].str.split('\n', expand=True)
