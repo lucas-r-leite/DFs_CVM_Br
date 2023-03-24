@@ -63,3 +63,15 @@ pivot_table = pd.pivot_table(df_concat, index=["Conta", "Descrição"], values=[
 
 # Salvar pivot table em um arquivo Excel
 pivot_table.to_excel("pivot_table.xlsx")
+
+# Carregar o arquivo pivot_table.xlsx em um DataFrame pandas
+df_pivot = pd.read_excel('pivot_table.xlsx')
+
+# Separar os valores da coluna "Valor" em colunas separadas
+df_pivot[['Valor1', 'Valor2', 'Valor3']] = df_pivot['Valor'].str.split('\n', expand=True)
+
+# Remover a coluna "Valor" original
+df_pivot = df_pivot.drop(columns=['Valor'])
+
+# Salvar o DataFrame atualizado em um arquivo Excel
+df_pivot.to_excel('pivot_table_updated.xlsx', index=False)
