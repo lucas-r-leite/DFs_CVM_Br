@@ -11,7 +11,7 @@ cvm_codes = cvm_httpclient.get_cvm_codes()
 categories = cvm_httpclient.get_consulta_externa_cvm_categories()
 
 # Realizando busca por Empresa
-start_date = date(2020, 12, 31)
+start_date = date(2018, 12, 31)
 end_dt = date.today()
 cvm_codes_list = ['21067'] # Moura_Dubeux
 category = ["EST_4"] # Códigos de categoria para DFP, ITR e fatos relevantes #, "EST_3", "IPE_4_-1_-1"
@@ -67,8 +67,13 @@ pivot_table.to_excel("pivot_table.xlsx")
 # Carregar o arquivo pivot_table.xlsx em um DataFrame pandas
 df_pivot = pd.read_excel('pivot_table.xlsx')
 
+# Obter o número máximo de valores em uma única célula "Valor" em todo o DataFrame
+max_values = int(df_pivot['Valor'].str.count('\n').max()) + 1
+value_cols = [f'Valor{i+1}' for i in range(max_values)]
+
 # Separar os valores da coluna "Valor" em colunas separadas
-df_pivot[['Valor1', 'Valor2', 'Valor3']] = df_pivot['Valor'].str.split('\n', expand=True)
+df_pivot[value_cols] = df_pivot['Valor'].str.split('\n', expand=True)
+#df_pivot[['Valor1', 'Valor2', 'Valor3','Valor4','Valor5']] = df_pivot['Valor'].str.split('\n', expand=True)
 
 # Remover a coluna "Valor" original
 df_pivot = df_pivot.drop(columns=['Valor'])
