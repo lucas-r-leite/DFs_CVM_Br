@@ -11,7 +11,15 @@ cvm_codes = cvm_httpclient.get_cvm_codes()
 categories = cvm_httpclient.get_consulta_externa_cvm_categories()
 
 # Realizando busca por Empresa
-start_date = date(2018, 12, 31)
+ano = int(input("Qual o ano inicial para a pesquisa? "))
+period = input("Você deseja buscar a partir do inicio o ano ou final?[inicio/final]")
+if period=="inicio":
+    start_date = date(ano, 1, 1)
+elif period=="final":
+    start_date = date(ano, 12, 31)
+else:
+    print("Entrada não reconhecida. Irei fazer a pesquisa pelo inicio do ano")
+    start_date = date(ano, 1, 1)
 end_dt = date.today()
 cvm_codes_list = ['21067'] # Moura_Dubeux
 category = ["EST_4"] # Códigos de categoria para DFP, ITR e fatos relevantes #, "EST_3", "IPE_4_-1_-1"
