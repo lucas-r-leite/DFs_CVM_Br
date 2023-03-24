@@ -56,4 +56,10 @@ for index, row in search_result.iterrows():
 
 
         # Salvar o dataframe no arquivo excel, repetindo as linhas das DFPs conforme os anos do filtro
-        df_concat.to_excel('Dados_CVM.xlsx', index=False)
+df_concat.to_excel('Dados_CVM.xlsx', index=False)
+
+# Criar pivot table
+pivot_table = pd.pivot_table(df_concat, index=["Conta", "Descrição"], values=["Valor"], aggfunc=sum)
+
+# Salvar pivot table em um arquivo Excel
+pivot_table.to_excel("pivot_table.xlsx")
