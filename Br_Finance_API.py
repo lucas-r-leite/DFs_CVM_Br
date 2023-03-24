@@ -59,7 +59,7 @@ for index, row in search_result.iterrows():
 df_concat.to_excel('Dados_CVM.xlsx', index=False)
 
 # Criar pivot table
-pivot_table = pd.pivot_table(df_concat, index=["Conta", "Descrição"], values=["Valor"], aggfunc=sum)
+pivot_table = pd.pivot_table(df_concat, index=["Conta", "Descrição"], values=["Valor"], aggfunc=lambda x: "\n".join(str(i) for i in x))
 
 # Salvar pivot table em um arquivo Excel
 pivot_table.to_excel("pivot_table.xlsx")
